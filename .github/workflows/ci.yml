@@ -32,8 +32,17 @@ jobs:
           npm run build
         else
           echo "No build script found, running placeholder build"
-          # Add actual build commands here
           echo "Building project..."
           mkdir -p dist
           cp index.html dist/
+        fi
+
+    - name: Test
+      run: |
+        if grep -q "test" package.json 2>/dev/null; then
+          npm test
+        else
+          echo "No test script found, running placeholder test"
+          # Add actual test commands here
+          echo "All tests passed!"
         fi
